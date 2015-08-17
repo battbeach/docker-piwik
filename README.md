@@ -31,6 +31,11 @@ It's based on the [marvambass/nginx-ssl-php](https://registry.hub.docker.com/u/m
 
 Piwik Database Settings
 
+* __PIWIK\_TRUSTED\_HOST\_ACTIVE__
+ * default: 0 (means can be connected from any host)
+* __PIWIK\_TRUSTED\_HOST__
+ * no default - needs to be set if __PIWIK\_TRUSTED\_HOST\_ACTIVE__ is used
+
 * __PIWIK\_MYSQL\_USER__
  * no default - if null it will start piwik in initial mode
 * __PIWIK\_MYSQL\_PASSWORD__

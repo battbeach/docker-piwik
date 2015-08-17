@@ -33,6 +33,12 @@ ADD conf/config.ini.php /piwik/config/config.ini.php
 ADD script/bootstrap.sh /opt/startup-piwik.sh
 RUN chmod a+x /opt/startup-piwik.sh
 
+ENV PIWIK_TRUSTED_HOST_ACTIVE 0
+ENV PIWIK_TRUSTED_HOST localhost
+
+RUN sed -i 's/{{PIWIK_TRUSTED_HOST_MARKER}}/${PIWIK_TRUSTED_HOST}/g' /piwik/config/config.ini.php
+RUN sed -i 's/{{PIWIK_TRUSTED_HOST_ACTIVE_MARKER}}/${PIWIK_TRUSTED_HOST_ACTIVE}/g' /piwik/config/config.ini.php
+
 # add '/opt/startup-piwik.sh' to entrypoint.sh
 RUN sed -i 's/# exec CMD/# exec CMD\n\/opt\/startup-piwik.sh/g' /opt/entrypoint.sh
 
