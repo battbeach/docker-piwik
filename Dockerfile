@@ -15,6 +15,7 @@ RUN apt-get update; apt-get install -yqq \
     php5-dev \
     libgeoip-dev \
     curl \
+    zip \
     nano
 
 # clean http directory
