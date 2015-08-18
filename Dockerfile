@@ -4,14 +4,17 @@ MAINTAINER Markus Kosmal <code@m-ko-x.de>
 
 ENV DH_SIZE 2048
 
+RUN export TERM=xterm
+
 RUN apt-get update; apt-get install -yqq \
     mysql-client \
     php5-mysql \
     php5-gd \
     php5-geoip \
     php-apc \
+    php5-dev \
+    libgeoip-dev \
     curl \
-    zip \
     nano
 
 # clean http directory
@@ -28,6 +31,10 @@ RUN unzip piwik.zip
 
 # add piwik config
 ADD conf/config.ini.php /piwik/config/config.ini.php
+
+# add geo db
+ADD db/GeoIPCity.dat /piwik/misc/
+RUN chown www-data:www-data /piwik/misc/GeoIPCity.dat
 
 # add startup.sh
 ADD script/bootstrap.sh /opt/startup-piwik.sh
